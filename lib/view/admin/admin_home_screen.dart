@@ -43,6 +43,9 @@ class _AdminLayoutState extends State<AdminLayout> {
                   );
                 },
               );
+              setState(() {
+
+              });
             },
             icon: const Icon(Icons.refresh),
           ),

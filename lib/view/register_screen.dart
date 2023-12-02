@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pizza_demo/constants.dart';
-import 'package:pizza_demo/view/customer/customer_home_screen.dart';
 import 'package:pizza_demo/view/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -27,19 +26,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             key: formKey,
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
                     controller: nameValue,
                     validator: (validation) {
-                      if (nameValue.text == null || nameValue.text.isEmpty) {
-                        return 'can not be empty';
+                      if (nameValue.text.isEmpty) {
+                        return 'name can not be empty';
                       }
                       return null;
                     },
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text('Name'),
+
                     ),
                   ),
                   const SizedBox(
@@ -117,6 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
                               } else
                                 Fluttertoast.showToast(
+                                  toastLength: Toast.LENGTH_LONG ,
                                     msg: 'the email is not valid',
                                     backgroundColor: Colors.red);
                             },

@@ -176,7 +176,7 @@ class _AddUsersScreenState extends State<AddUsersScreen> {
                                 if (value == false)
                                   {
                                     Fluttertoast.showToast(
-                                        msg: 'the email already exists'),
+                                        msg: 'the email already exists',backgroundColor: Colors.red),
                                   }
                                 else
                                   {

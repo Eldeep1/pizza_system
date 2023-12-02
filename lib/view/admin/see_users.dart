@@ -13,7 +13,45 @@ class SeeUsersScreen extends StatefulWidget {
 
 class _SeeUsersScreenState extends State<SeeUsersScreen> {
   @override
+  void initState() {
+
+    // TODO: implement initState
+    super.initState();
+    getUsersFromDataBase().then((value) {
+      setState(() {
+
+      });
+    });
+  }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    getUsersFromDataBase().then((value) {
+      setState(() {
+
+      });
+    });
+  }
+  @override
+  void didUpdateWidget(covariant SeeUsersScreen oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    getUsersFromDataBase().then((value) {
+      setState(() {
+
+      });
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+    setState(() {
+      getUsersFromDataBase().then((value) {
+        setState(() {
+
+        });
+      });
+    });
     return Stack(
       children: [
         SingleChildScrollView(

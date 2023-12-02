@@ -5,6 +5,7 @@ import 'package:pizza_demo/view/login_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   createDataBase();
+
   runApp(const MyApp());
 }
 

@@ -11,6 +11,16 @@ class ItemsScreen extends StatefulWidget {
 
 class _ItemsScreenState extends State<ItemsScreen> {
   @override
+  void initState() {
+    getItemsFromDataBase().then((value) {
+      setState(() {
+        print(coldItems);
+      });
+    });
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [

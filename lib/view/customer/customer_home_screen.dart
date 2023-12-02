@@ -34,8 +34,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
             onPressed: () {
               setState(
                 () {
-                  getUsersFromDataBase().then(
-                    (value) {
+
+
                       getItemsFromDataBase().then(
                         (value) {
                           getOrdersForOneUser();
@@ -43,9 +43,12 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                         },
                       );
                     },
-                  );
-                },
+
+
               );
+              setState(() {
+                print(coldItems);
+              });
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -81,8 +84,7 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         },
       ),
       body: currentIndex == 0
-          ? const ItemsScreen()
-          : currentIndex == 3
+          ? const ItemsScreen() : currentIndex == 3
               ? const SettingsScreen()
               : currentIndex == 1
                   ? const HotOfferes()

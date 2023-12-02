@@ -60,7 +60,7 @@ class _OrderingScreenState extends State<OrderingScreen> {
               ),
               Row(
                 children: [
-                  Text('${itemToOrder['name']}'),
+                  Text('${itemToOrder['name']}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
                 ],
               ),
               Text('${itemToOrder['description']}'),

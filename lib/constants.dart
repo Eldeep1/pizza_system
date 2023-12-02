@@ -15,9 +15,6 @@ var itemToChange;
 
 Future<void> getItemsFromDataBase() async {
   items = await database.rawQuery('select * from items').then((value) {
-    print('zzzzzzzzzzzz');
-    print(coldItems);
-    print(items);
     hotItems = [];
     coldItems = [];
     for (int i = 0; i < items.length; i++) {
@@ -77,12 +74,7 @@ Future<bool> registerCustomer({
       'isWorker': false,
       'isCustomer': true
     }).then((value) {
-      users = {
-        'name': name,
-        'email': mail,
-        'password': password,
-        'phone': phone
-      };
+
     });
     return true;
   } else {
@@ -158,6 +150,17 @@ void createDataBase() {
       ''').catchError((error) {
         print('Error creating items table: $error');
       });
+
+      db.insert('items', {
+        'name': 'pizza chicken ranch',
+        'description':
+        ' Indulge in the savory harmony of grilled chicken, crispy bacon, and creamy ranch dressing atop a bed of melted mozzarella cheese. This pizza masterpiece combines the smoky goodness of seasoned chicken with the rich, tangy notes of ranch, creating a flavor symphony that\'s both satisfying and irresistible. Each bite is a delightful journey through the luscious layers of toppings, making this pizza a perfect choice for those who crave a hearty and ranch-infused culinary experience.',
+        'image':
+        'https://scontent.fcai19-7.fna.fbcdn.net/v/t1.6435-9/67306918_2427403817315865_6038552928153763840_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=4dc865&_nc_ohc=rSoUuFZ4wl0AX8Scpa0&_nc_ht=scontent.fcai19-7.fna&oh=00_AfBc2uNBI23UWqWFRtojKMVvdPfIbL38xsiylhVHy1UMwA&oe=658F29E7',
+        'price': '140',
+        'isHot': true
+      });
+
       db.insert('items', {
         'name': 'Margherita Bliss',
         'description':
@@ -260,7 +263,7 @@ void createDataBase() {
       db.insert('items', {
         'name': 'Spinach and Feta Sensation',
         'description':
-            'https://www.cookitrealgood.com/wp-content/uploads/2020/06/spinachfetapizza4.jpg',
+            'Fresh spinach, feta cheese, and black olives create a light and flavorful pizza experience',
         'image':
             'https://www.cookitrealgood.com/wp-content/uploads/2020/06/spinachfetapizza4.jpg',
         'price': '120',

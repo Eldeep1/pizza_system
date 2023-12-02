@@ -1,8 +1,13 @@
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pizza_demo/constants.dart';
 import 'package:pizza_demo/view/admin/edit_order_screen.dart';
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pdfWid;
+import 'package:printing/printing.dart';
 
 class SeeOrdersClass extends StatefulWidget {
   const SeeOrdersClass({super.key});
@@ -46,6 +51,29 @@ class _SeeOrdersClassState extends State<SeeOrdersClass> {
                           itemCount: usersOrders.length),
                     ),
             ],
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: InkWell(
+              onTap: () {
+                createPdf();
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  size: 50,
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -131,7 +159,86 @@ class _SeeOrdersClassState extends State<SeeOrdersClass> {
                   ),
                 );
               },
-              icon: const Icon(Icons.edit)),
+              icon: const Icon(Icons.download_outlined)),
         ],
       );
+
+  Future<void> createPdf() async {
+    final pdf = pdfWid.Document(
+      version: PdfVersion.pdf_1_4,
+      compress: true,
+    );
+    for(int i=0;i<usersOrders.length;i++){
+    pdf.addPage(
+      pdfWid.Page(
+        build: (context) {
+          return pdfWid.Column(children: [
+            pdfWid.Row(children: [
+              pdfWid.Text('food name',style: pdfWid.TextStyle(
+                  fontSize: 24, fontWeight: pdfWid.FontWeight.bold),),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['itemName']}',style: pdfWid.TextStyle(
+                  fontSize: 24,),),
+            ]),
+            pdfWid.SizedBox(height: 20),
+            pdfWid.Row(children: [
+              pdfWid.Text('customer name',style: pdfWid.TextStyle(
+                  fontSize: 24, fontWeight: pdfWid.FontWeight.bold),),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['userName']}',style: pdfWid.TextStyle(
+                fontSize: 24,)),
+            ]),
+            pdfWid.SizedBox(height: 20),
+            pdfWid.Row(children: [
+              pdfWid.Text('customer phone',style: pdfWid.TextStyle(
+                  fontSize: 24, fontWeight: pdfWid.FontWeight.bold),),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['userName']}',style: pdfWid.TextStyle(
+                fontSize: 24,)),
+            ]),
+            pdfWid.SizedBox(height: 20),
+            pdfWid.Row(children: [
+              pdfWid.Text('order date',style: pdfWid.TextStyle(
+                  fontSize: 24, fontWeight: pdfWid.FontWeight.bold),),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['date']}',style: pdfWid.TextStyle(
+                fontSize: 24,)),
+            ]),
+            pdfWid.SizedBox(height: 20),
+            pdfWid.Row(children: [
+              pdfWid.Text('order quantity',style: pdfWid.TextStyle(
+                  fontSize: 24, fontWeight: pdfWid.FontWeight.bold),),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['quantity']}',style: pdfWid.TextStyle(
+                fontSize: 24,)),
+            ]),
+            pdfWid.SizedBox(height: 20),
+            pdfWid.Row(children: [
+              pdfWid.Text('order price',style: pdfWid.TextStyle(
+                  fontSize: 24, fontWeight: pdfWid.FontWeight.bold),),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['price']}',style: pdfWid.TextStyle(
+                fontSize: 24,)),
+            ]),
+            pdfWid.SizedBox(height: 20),
+            pdfWid.Row(children: [
+              pdfWid.Text(
+                'order statue',
+                style: pdfWid.TextStyle(
+                    fontSize: 24, fontWeight: pdfWid.FontWeight.bold),
+              ),
+              pdfWid.SizedBox(width: 10),
+              pdfWid.Text('${usersOrders[i]['statue']}',style: pdfWid.TextStyle(
+                fontSize: 24,)),
+            ]),
+          ]);
+        },
+      ),
+    );}
+    final path = (await getExternalStorageDirectory())!.path;
+    final file = File('$path/orders.pdf');
+
+    await file.writeAsBytes(await pdf.save());
+    OpenFile.open('$path/orders.pdf');
+  }
 }

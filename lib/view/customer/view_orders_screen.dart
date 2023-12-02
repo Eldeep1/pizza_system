@@ -33,7 +33,7 @@ class _ViewingOrdersScreenState extends State<ViewingOrdersScreen> {
     getOrdersForOneUser().then((value) {
       setState(() {});
     });
-    return Stack(
+    return Column(
       children: [
         SingleChildScrollView(
           child: Column(
