@@ -69,7 +69,7 @@ class _SeeOrdersClassState extends State<SeeOrdersClass> {
                   ),
                 ),
                 child: const Icon(
-                  Icons.add,
+                  Icons.download_outlined,
                   size: 50,
                 ),
               ),
@@ -159,7 +159,7 @@ class _SeeOrdersClassState extends State<SeeOrdersClass> {
                   ),
                 );
               },
-              icon: const Icon(Icons.download_outlined)),
+              icon: const Icon(Icons.edit)),
         ],
       );
 

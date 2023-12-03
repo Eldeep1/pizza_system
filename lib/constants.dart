@@ -129,8 +129,8 @@ void createDataBase() {
         print('Error creating users table: $error');
       });
       db.insert('users', {
-        'name': 'haytham',
-        'email': 'haytham@gmail.com',
+        'name': 'aya',
+        'email': 'aya@gmail.com',
         'password': '123456',
         'phone': '123456',
         'isAdmin': true,
