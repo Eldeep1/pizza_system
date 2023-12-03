@@ -195,6 +195,12 @@ class _SeeUsersScreenState extends State<SeeUsersScreen> {
                       )
                           .then(
                         (value) {
+                          database.rawQuery('delete from orders where userId =${allUsers[index]['id']}').then((value) {
+                            setState(() {
+
+                            });
+                          });
+
                           setState(
                             () {
                               print(allUsers[index]['name']);
