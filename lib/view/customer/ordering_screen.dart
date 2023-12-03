@@ -152,9 +152,7 @@ class _OrderingScreenState extends State<OrderingScreen> {
     price = int.parse(itemToOrder['price']) * quantity;
     int toMinus = 0;
 
-    if (quantity >= 3) {
-      toMinus += (price! * (10 / 100)).floor();
-    }
+
 
     if (price! > 500) {
       toMinus += 100;
@@ -162,6 +160,9 @@ class _OrderingScreenState extends State<OrderingScreen> {
 
     if (quantity >= 5) {
       toMinus += (price! * (20 / 100)).floor();
+    }
+    else if (quantity >= 3) {
+      toMinus += (price! * (10 / 100)).floor();
     }
 
     print(quantity);

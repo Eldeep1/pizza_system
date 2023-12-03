@@ -237,7 +237,7 @@ class _SeeOrdersClassState extends State<SeeOrdersClass> {
     );}
     final path = (await getExternalStorageDirectory())!.path;
     final file = File('$path/orders.pdf');
-
+print(path);
     await file.writeAsBytes(await pdf.save());
     OpenFile.open('$path/orders.pdf');
   }
